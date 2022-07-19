@@ -1,17 +1,12 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-const API_KEY = "d6e8a7c33df73885954832bcecbaefe4";
 export default function Navbar() {
   const router = useRouter();
   const [movies, setMovies] = useState([]);
   useEffect(() => {
     (async () => {
-      const { results } = await (
-        await fetch(
-          `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`
-        )
-      ).json();
+      const { results } = await (await fetch(`/api/movies`)).json();
       setMovies(results);
     })();
   }, []);
